@@ -1,0 +1,49 @@
+import pyautogui as pa
+import time
+import pyperclip as pc  # Para copiar textos longos, se necessário  
+
+# Configuração de pausa entre ações
+pa.PAUSE = 1
+
+# Credenciais e configurações
+sap_path = r"C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe"  # Altere o caminho do SAP Logon
+#usuario = "ROBERT.AS"
+#senha = "MariaFRD9C63@"
+sistema = "SAP_PROD"  # Nome do sistema a ser selecionado no SAP Logon
+
+def abrir_sap():
+    """Abre o SAP Logon."""
+    print("Abrindo o SAP Logon...")
+    pa.hotkey('win', 'r')  # Abre o 'Executar' do Windows
+    pa.write(sap_path)
+    pa.press('enter')
+
+def selecionar_sistema(sistema):
+    """Seleciona o sistema desejado no SAP Logon."""
+    print(f"Selecionando o sistema: {sistema}")
+    time.sleep(5)  # Aguarda o SAP Logon abrir
+    pa.write(sistema)
+    pa.press('enter')
+
+def realizar_login(usuario, senha):
+    """Realiza login no SAP."""
+    print("Realizando login no SAP...")
+    time.sleep(5)  # Aguarda a tela de login aparecer
+    #pa.write(usuario)
+    pa.press('tab')
+    #pa.write(senha)
+    pa.press('enter')
+
+def acessar_transacao(transacao):
+    """Acessa uma transação específica."""
+    print(f"Acessando a transação {transacao}...")
+    time.sleep(5)  # Aguarda a tela inicial carregar
+    pa.press('f5')  # Abre o campo de comando
+    pa.write(transacao)
+    pa.press('enter')
+
+if __name__ == "__main__":
+    abrir_sap()
+    selecionar_sistema(sistema)
+    #realizar_login(usuario, senha)
+    acessar_transacao("ME23N")
